@@ -687,7 +687,7 @@ export default function App() {
               {/* Stats / Overview Row */}
               <div className="grid-3" style={{ marginBottom: '1.5rem' }}>
                 {/* Risk Level gauge */}
-                <div className="card">
+                <div className="card dashboard-stat-card">
                   <div className="card-title">
                     <Activity size={18} style={{ color: 'var(--color-blue)' }} />
                     {t.riskLevel}
@@ -727,7 +727,7 @@ export default function App() {
                 </div>
 
                 {/* Compliance progress */}
-                <div className="card" style={{ display: 'flex', flexDirection: 'column', justifycontent: 'space-between' }}>
+                <div className="card dashboard-stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <div className="card-title">
                       <Award size={18} style={{ color: 'var(--color-emerald)' }} />
@@ -754,7 +754,7 @@ export default function App() {
                 </div>
 
                 {/* Training completed */}
-                <div className="card" style={{ display: 'flex', flexDirection: 'column', justifycontent: 'space-between' }}>
+                <div className="card dashboard-stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <div className="card-title">
                       <BookOpen size={18} style={{ color: 'var(--color-purple)' }} />
@@ -778,7 +778,7 @@ export default function App() {
 
               {/* Active alerts & map */}
               <div className="grid-2">
-                <div className="card">
+                <div className="card dashboard-alert-card">
                   <div className="card-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <AlertTriangle size={18} style={{ color: 'var(--color-rose)' }} />
@@ -805,12 +805,12 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="card">
+                <div className="card dashboard-map-card">
                   <div className="card-title">
                     <Globe size={18} style={{ color: 'var(--color-blue)' }} />
                     Epidemiological Risk Mapping
                   </div>
-                  <div style={{ height: '240px', background: '#0e1422', borderRadius: '0.75rem', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                  <div className="dashboard-map-visual" style={{ height: '240px', position: 'relative', overflow: 'hidden' }}>
                     {/* Simulated SVG Grid Map */}
                     <svg width="100%" height="100%" style={{ position: 'absolute', opacity: 0.15 }}>
                       <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
