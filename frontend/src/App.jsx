@@ -84,26 +84,40 @@ export default function App() {
   useEffect(() => {
     const verifyAuth = async () => {
       const savedToken = localStorage.getItem('auth_token');
-      if (savedToken) {
-        try {
-          const res = await fetch(`${API_BASE}/auth/me`, {
-            headers: { Authorization: `Bearer ${savedToken}` }
-          });
-          if (res.ok) {
-            const userData = await res.json();
-            setToken(savedToken);
-            setUser(userData);
-            setIsAuthenticated(true);
-          } else {
-            localStorage.removeItem('auth_token');
+
+      if (!savedToken) {
+        setAuthLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${savedToken}`
           }
-        } catch (err) {
-          console.error('Auth verification failed:', err);
+        });
+
+        if (res.ok) {
+          const userData = await res.json();
+
+          setToken(savedToken);
+          setUser(userData);
+          setIsAuthenticated(true);
+
+          if (userData.speciesPreference) {
+            setSpecies(userData.speciesPreference);
+          }
+        } else {
           localStorage.removeItem('auth_token');
         }
+      } catch (err) {
+        console.error(err);
+        localStorage.removeItem('auth_token');
       }
+
       setAuthLoading(false);
     };
+
     verifyAuth();
   }, []);
 
@@ -114,34 +128,6 @@ export default function App() {
     }
   }, [species, isAuthenticated]);
 
-  const handleLogin = async () => {
-  try {
-    const response = await fetch(`${API_BASE}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username,
-        password
-      })
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem('auth_token', data.token);
-      setToken(data.token);
-      setUser(data.user);
-      setIsAuthenticated(true);
-    } else {
-      alert(data.error || 'Login failed');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Server unreachable');
-  }
-};
 
   // Handle Logout
   const handleLogout = () => {
@@ -550,7 +536,7 @@ export default function App() {
 
   if (authLoading) {
     return (
-      <div className="auth-loading-screen">
+      <div className="loading-screen">
         <div className="loading-spinner"></div>
         <p>Verifying credentials...</p>
       </div>
@@ -1480,159 +1466,159 @@ export default function App() {
 
     </div>
   );
-}
 
-function LoginScreen({ onLoginSuccess }) {
-  const [isLogin, setIsLogin] = React.useState(true);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [role, setRole] = React.useState('Farmer');
-  const [farmName, setFarmName] = React.useState('');
-  const [speciesPreference, setSpeciesPreference] = React.useState('Poultry');
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [error, setError] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const normalizedUsername = username.trim();
-    if (!normalizedUsername || !password.trim()) {
-      setError('Please fill in all fields');
-      return;
-    }
-    setError('');
-    setLoading(true);
+  function LoginScreen({ onLoginSuccess }) {
+    const [isLogin, setIsLogin] = React.useState(true);
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [role, setRole] = React.useState('Farmer');
+    const [farmName, setFarmName] = React.useState('');
+    const [speciesPreference, setSpeciesPreference] = React.useState('Poultry');
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [error, setError] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
 
-    const endpoint = isLogin ? '/auth/login' : '/auth/register';
-    const body = isLogin
-      ? { username: normalizedUsername, password }
-      : { username: normalizedUsername, password, role, farmName, speciesPreference };
-
-    try {
-      const res = await fetch(`${API_BASE}${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const data = await res.json();
-      if (res.ok) {
-        onLoginSuccess(data.token, data.user);
-      } else {
-        setError(data.error || 'Authentication failed');
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const normalizedUsername = username.trim();
+      if (!normalizedUsername || !password.trim()) {
+        setError('Please fill in all fields');
+        return;
       }
-    } catch (err) {
-      setError('Server unreachable. Please ensure the backend is running.');
-    } finally {
-      setLoading(false);
-    }
-  };
+      setError('');
+      setLoading(true);
 
-  return (
-    <div className="login-wrapper">
-      <div className="login-glass-card">
-        <div className="login-logo-section">
-          <div className="shield-glow-container">
-            <Shield className="login-shield-icon" size={48} />
-          </div>
-          <h2>BioShield Portal</h2>
-          <p>Biosecurity & Compliance Management</p>
-        </div>
+      const endpoint = isLogin ? '/auth/login' : '/auth/register';
+      const body = isLogin
+        ? { username: normalizedUsername, password }
+        : { username: normalizedUsername, password, role, farmName, speciesPreference };
 
-        <div className="login-tabs">
-          <button
-            type="button"
-            className={`login-tab ${isLogin ? 'active' : ''}`}
-            onClick={() => { setIsLogin(true); setError(''); setShowPassword(false); }}
-          >
-            Sign In
-          </button>
-          <button
-            type="button"
-            className={`login-tab ${!isLogin ? 'active' : ''}`}
-            onClick={() => { setIsLogin(false); setError(''); setShowPassword(false); }}
-          >
-            Register
-          </button>
-        </div>
+      try {
+        const res = await fetch(`${API_BASE}${endpoint}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          onLoginSuccess(data.token, data.user);
+        } else {
+          setError(data.error || 'Authentication failed');
+        }
+      } catch (err) {
+        setError('Server unreachable. Please ensure the backend is running.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        <form onSubmit={handleSubmit} className="login-form">
-          {error && <div className="login-error-msg">{error}</div>}
-
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-              className="form-input"
-              required
-            />
+    return (
+      <div className="login-wrapper">
+        <div className="login-glass-card">
+          <div className="login-logo-section">
+            <div className="shield-glow-container">
+              <Shield className="login-shield-icon" size={48} />
+            </div>
+            <h2>BioShield Portal</h2>
+            <p>Biosecurity & Compliance Management</p>
           </div>
 
-          <div className="form-group">
-            <label>Password</label>
-            <div className="password-input-container">
+          <div className="login-tabs">
+            <button
+              type="button"
+              className={`login-tab ${isLogin ? 'active' : ''}`}
+              onClick={() => { setIsLogin(true); setError(''); setShowPassword(false); }}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              className={`login-tab ${!isLogin ? 'active' : ''}`}
+              onClick={() => { setIsLogin(false); setError(''); setShowPassword(false); }}
+            >
+              Register
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit} className="login-form">
+            {error && <div className="login-error-msg">{error}</div>}
+
+            <div className="form-group">
+              <label>Username</label>
               <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                className="form-input password-input"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                className="form-input"
                 required
               />
-              <button
-                type="button"
-                className="password-toggle-btn"
-                onClick={() => setShowPassword(!showPassword)}
-                title={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
             </div>
-          </div>
 
-          {!isLogin && (
-            <>
-              <div className="form-group">
-                <label>Farm Name</label>
+            <div className="form-group">
+              <label>Password</label>
+              <div className="password-input-container">
                 <input
-                  type="text"
-                  value={farmName}
-                  onChange={(e) => setFarmName(e.target.value)}
-                  placeholder="e.g. Greenwood Swine"
-                  className="form-input"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="form-input password-input"
                   required
                 />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  title={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
+            </div>
 
-              <div className="form-row">
-                <div className="form-group" style={{ flex: 1 }}>
-                  <label>Role</label>
-                  <select value={role} onChange={(e) => setRole(e.target.value)} className="form-select">
-                    <option value="Farmer">Farmer</option>
-                    <option value="Veterinarian">Veterinarian</option>
-                    <option value="Extension Officer">Extension Officer</option>
-                  </select>
+            {!isLogin && (
+              <>
+                <div className="form-group">
+                  <label>Farm Name</label>
+                  <input
+                    type="text"
+                    value={farmName}
+                    onChange={(e) => setFarmName(e.target.value)}
+                    placeholder="e.g. Greenwood Swine"
+                    className="form-input"
+                    required
+                  />
                 </div>
 
-                <div className="form-group" style={{ flex: 1 }}>
-                  <label>Primary Species</label>
-                  <select value={speciesPreference} onChange={(e) => setSpeciesPreference(e.target.value)} className="form-select">
-                    <option value="Poultry">Poultry 🐥</option>
-                    <option value="Pig">Pigs 🐖</option>
-                  </select>
-                </div>
-              </div>
-            </>
-          )}
+                <div className="form-row">
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label>Role</label>
+                    <select value={role} onChange={(e) => setRole(e.target.value)} className="form-select">
+                      <option value="Farmer">Farmer</option>
+                      <option value="Veterinarian">Veterinarian</option>
+                      <option value="Extension Officer">Extension Officer</option>
+                    </select>
+                  </div>
 
-          <button type="submit" className="btn btn-primary login-submit-btn" style={{ width: '100%', marginTop: '1.5rem', padding: '0.75rem' }} disabled={loading}>
-            {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Create Account'}
-          </button>
-        </form>
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label>Primary Species</label>
+                    <select value={speciesPreference} onChange={(e) => setSpeciesPreference(e.target.value)} className="form-select">
+                      <option value="Poultry">Poultry 🐥</option>
+                      <option value="Pig">Pigs 🐖</option>
+                    </select>
+                  </div>
+                </div>
+              </>
+            )}
+
+            <button type="submit" className="btn btn-primary login-submit-btn" style={{ width: '100%', marginTop: '1.5rem', padding: '0.75rem' }} disabled={loading}>
+              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Create Account'}
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
