@@ -575,7 +575,7 @@ export default function App() {
           <div className="language-selector">
             <Globe size={18} />
             <select
-              value={language}
+              value={lang}
               onChange={(e) => setLang(e.target.value)}
             >
               <option value="en">English</option>
