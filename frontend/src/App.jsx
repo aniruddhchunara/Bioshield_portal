@@ -25,7 +25,9 @@ import {
 } from 'lucide-react';
 import { translations, surveyQuestions } from './translations';
 
-const API_BASE = import.meta.env.DEV ? 'http://127.0.0.1:5000/api' : '/api';
+const API_BASE =
+  import.meta.env.https://bioshield-portal.onrender.com
+ || 'http://127.0.0.1:5000/api';
 
 export default function App() {
   const [lang, setLang] = useState('en');
