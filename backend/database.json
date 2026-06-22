@@ -230,15 +230,15 @@
     "poultry-default": {
       "compartmentName": "Greenwood Poultry Farm",
       "farmType": "Poultry",
-      "progress": 0,
+      "progress": 40,
       "items": {
-        "fencing": false,
+        "fencing": true,
         "visitorLog": false,
-        "quarantineArea": false,
+        "quarantineArea": true,
         "disinfectionBath": false,
-        "feedStorageSafe": false,
+        "feedStorageSafe": true,
         "waterTreatment": false,
-        "vetContract": false,
+        "vetContract": true,
         "recordKeeping": false,
         "carcassDisposal": false,
         "staffTraining": false
@@ -309,5 +309,16 @@
         "module-3": 0
       }
     }
-  }
+  },
+  "users": [
+    {
+      "id": "user-1782110295181",
+      "username": "anirudh",
+      "password": "$2b$10$IEQDwvkQmjIfT/TXWqkpweoH4vlqexw3Kcrc33qJzMp62Qr257QHi",
+      "role": "Farmer",
+      "farmName": "farm yard street",
+      "speciesPreference": "Poultry",
+      "createdAt": "2026-06-22T06:38:15.181Z"
+    }
+  ]
 }

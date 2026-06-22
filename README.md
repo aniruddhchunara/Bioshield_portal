@@ -1,15 +1,17 @@
 # BioShield Portal - Animal Health Biosecurity Management Platform
 
 BioShield is a modern, responsive, and mobile-first web portal built to empower pig and poultry farmers with practical biosecurity tools, compliance audits, training modules, real-time alerts, and AI-powered diagnostic guidance.
-
-## Project Preview
+## Preview
 
 <p align="center">
-  <img src="docs/screenshots/login-screen.png" alt="BioShield Portal login screen" width="100%">
+  <img src="docs/screenshots/Screenshot%202026-06-22%20121200.png" width="45%">
+  <img src="docs/screenshots/Screenshot%202026-06-22%20121225.png" width="45%">
 </p>
 
-<p align="center"><em>Secure access to the BioShield animal-health management portal.</em></p>
-
+<p align="center">
+  <img src="docs/screenshots/Screenshot%202026-06-22%20121234.png" width="45%">
+  <img src="docs/screenshots/Screenshot%202026-06-22%20121247.png" width="45%">
+</p>
 ## Architecture & Features
 
 This platform is structured as a full-stack JavaScript application:
