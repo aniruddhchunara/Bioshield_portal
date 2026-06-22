@@ -6,11 +6,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const { 
-  connectToMongo, 
-  loadDatabase, 
-  saveDatabase, 
-  findUserByUsername, 
+const {
+  connectToMongo,
+  loadDatabase,
+  saveDatabase,
+  findUserByUsername,
   saveUser,
   getDbCollection,
   DB_PATH
@@ -28,7 +28,8 @@ app.use(express.json());
 
 // 0. Authentication API
 app.post('/api/auth/register', async (req, res) => {
-  const { username, password, role, farmName, speciesPreference } = req.body;
+  const { username: rawUsername, password, role, farmName, speciesPreference } = req.body;
+  const username = rawUsername?.trim();
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required' });
   }
@@ -52,7 +53,7 @@ app.post('/api/auth/register', async (req, res) => {
     await saveUser(newUser);
 
     const token = jwt.sign({ id: newUser.id, username: newUser.username }, JWT_SECRET, { expiresIn: '7d' });
-    
+
     const { password: _, ...userResponse } = newUser;
     res.status(201).json({ token, user: userResponse });
   } catch (error) {
@@ -62,7 +63,8 @@ app.post('/api/auth/register', async (req, res) => {
 });
 
 app.post('/api/auth/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username: rawUsername, password } = req.body;
+  const username = rawUsername?.trim();
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required' });
   }
@@ -132,7 +134,7 @@ app.post('/api/outbreaks', (req, res) => {
 // 2. Risk Assessment API
 app.post('/api/risk-assessment', (req, res) => {
   const { farmType, answers } = req.body;
-  
+
   // Custom biosecurity scoring algorithm
   let maxScore = 0;
   let score = 0;
@@ -190,7 +192,7 @@ app.post('/api/risk-assessment', (req, res) => {
   if (answers.quarantine !== 'yes') recommendations.push('Designate a quarantine pen at least 30 meters away from main sheds for new/returned livestock.');
   if (answers.disinfection !== 'yes') recommendations.push('Install footbaths with fresh disinfectant (changed daily) at the entrance of every shed.');
   if (answers.waterSource !== 'treated') recommendations.push('Implement chlorination or UV filtration for all water used by livestock.');
-  
+
   if (farmType === 'Pig' && answers.swillFeed === 'yes') {
     recommendations.push('STRICTLY stop feeding swill/food scraps. Switch to heat-treated commercial feeds or boil scraps for at least 30 minutes at rolling boil.');
   }
@@ -233,9 +235,9 @@ app.post('/api/compliance/:farmType', (req, res) => {
   const db = loadDatabase();
   const farmType = req.params.farmType;
   const recordKey = farmType === 'Pig' ? 'pig-default' : 'poultry-default';
-  
+
   const { items, compartmentName } = req.body;
-  
+
   // Calculate progress percentage
   const total = Object.keys(items).length;
   const completed = Object.values(items).filter(Boolean).length;
@@ -373,7 +375,7 @@ app.get('/api/training', (req, res) => {
       ]
     }
   ];
-  
+
   const db = loadDatabase();
   res.json({
     modules,
@@ -384,18 +386,18 @@ app.get('/api/training', (req, res) => {
 app.post('/api/training/complete', (req, res) => {
   const { moduleId, score } = req.body;
   const db = loadDatabase();
-  
+
   if (!db.trainingProgress['user-default']) {
     db.trainingProgress['user-default'] = { completedModules: [], scores: {} };
   }
-  
+
   if (!db.trainingProgress['user-default'].completedModules.includes(moduleId)) {
     db.trainingProgress['user-default'].completedModules.push(moduleId);
   }
-  
+
   db.trainingProgress['user-default'].scores[moduleId] = score;
   saveDatabase(db);
-  
+
   res.json(db.trainingProgress['user-default']);
 });
 
@@ -418,7 +420,7 @@ app.post('/api/assistant', async (req, res) => {
     } else {
       reply = "💡 **[AI Assistant Fallback - Local Rules Engine Activated]**\n\nThank you for reaching out! To enable my full capabilities (including diagnostic scans, localized weather/epidemiology risk mapping, and personalized solutions), **please add your Gemini API Key in the backend `.env` file**.\n\nHere are some core biosecurity rules to keep in mind:\n- Maintain strict perimeter fences.\n- Log and sanitize all visitors.\n- Quarantine new livestock for at least 21 days.\n- Do not feed food scraps (swill) to pigs.";
     }
-    
+
     return res.json({ response: reply, usingFallback: true });
   }
 
@@ -473,7 +475,7 @@ Keep formatting clean and readable on mobile screens.`;
 
     const result = await model.generateContent({ contents });
     const responseText = result.response.text();
-    
+
     res.json({ response: responseText, usingFallback: false });
   } catch (error) {
     console.error('Error generating content from Gemini API:', error);
