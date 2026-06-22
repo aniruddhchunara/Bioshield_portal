@@ -81,13 +81,46 @@ export default function App() {
   }, [chatHistory]);
 
   // Auth check on mount
- useEffect(() => {
-  setIsAuthenticated(false);
-  setUser(null);
-  setToken('');
-  localStorage.removeItem('auth_token');
-  setAuthLoading(false);
-}, []);
+  // Auth check on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      const savedToken = localStorage.getItem('auth_token');
+
+      if (!savedToken) {
+        setAuthLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${savedToken}`
+          }
+        });
+
+        if (res.ok) {
+          const userData = await res.json();
+
+          setUser(userData);
+          setToken(savedToken);
+          setIsAuthenticated(true);
+
+          if (userData.speciesPreference) {
+            setSpecies(userData.speciesPreference);
+          }
+        } else {
+          localStorage.removeItem('auth_token');
+        }
+      } catch (err) {
+        console.error('Auth verification failed:', err);
+        localStorage.removeItem('auth_token');
+      }
+
+      setAuthLoading(false);
+    };
+
+    checkAuth();
+  }, []);
 
   // Fetch all initial data
   useEffect(() => {
@@ -95,6 +128,23 @@ export default function App() {
       fetchAllData();
     }
   }, [species, isAuthenticated]);
+
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('auth_token', data.token);
+        setToken(data.token);
+        setUser(data.user);
+        setIsAuthenticated(true);
+      } else {
+        alert(data.error || 'Login failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Server unreachable');
+    }
+  };
 
   // Handle Logout
   const handleLogout = () => {
