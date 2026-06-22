@@ -30,7 +30,7 @@ const API_BASE =
     ? 'http://127.0.0.1:5000/api'
     : 'https://bioshield-portal.onrender.com/api';
 export default function App() {
-  const [lang, setLang] = useState('en');
+  const [lang , setLang] = useState('en');
   const [species, setSpecies] = useState('Poultry'); // Poultry or Pig
   const [activeTab, setActiveTab] = useState('dashboard');
 
@@ -576,7 +576,7 @@ export default function App() {
             <Globe size={18} />
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={(e) => setLang(e.target.value)}
             >
               <option value="en">English</option>
               <option value="sw">Swahili</option>
