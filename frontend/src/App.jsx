@@ -81,7 +81,31 @@ export default function App() {
   }, [chatHistory]);
 
   // Auth check on mount
- 
+  useEffect(() => {
+    const verifyAuth = async () => {
+      const savedToken = localStorage.getItem('auth_token');
+      if (savedToken) {
+        try {
+          const res = await fetch(`${API_BASE}/auth/me`, {
+            headers: { Authorization: `Bearer ${savedToken}` }
+          });
+          if (res.ok) {
+            const userData = await res.json();
+            setToken(savedToken);
+            setUser(userData);
+            setIsAuthenticated(true);
+          } else {
+            localStorage.removeItem('auth_token');
+          }
+        } catch (err) {
+          console.error('Auth verification failed:', err);
+          localStorage.removeItem('auth_token');
+        }
+      }
+      setAuthLoading(false);
+    };
+    verifyAuth();
+  }, []);
 
   // Fetch all initial data
   useEffect(() => {
