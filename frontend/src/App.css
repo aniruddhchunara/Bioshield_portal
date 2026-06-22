@@ -201,100 +201,205 @@
     right: 0;
     border-right-color: var(--border);
   }
-  
 
-.ticks {
-  position: relative;
-  width: 100%;
-}
 
-.ticks::before,
-.ticks::after {
-  content: '';
-  position: absolute;
-  top: -4.5px;
-  border: 5px solid transparent;
-}
-
-.ticks::before {
-  left: 0;
-  border-left-color: var(--border);
-}
-
-.ticks::after {
-  right: 0;
-  border-right-color: var(--border);
-}
-
-/* Mobile Responsive Fixes */
-html,
-body,
-#root {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-img,
-svg {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
+  .ticks {
     position: relative;
-    min-height: auto;
-  }
-
-  .main-content {
-    width: 100%;
-    margin-left: 0;
-    padding: 12px;
-  }
-
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card,
-  .panel,
-  .widget,
-  .chart-container {
     width: 100%;
   }
 
-  input,
-  select,
-  textarea,
-  button {
+  .ticks::before,
+  .ticks::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  .ticks::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+
+  .ticks::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+
+  /* Mobile Responsive Fixes */
+  html,
+  body,
+  #root {
     width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
   }
 
-  .auth-card,
-  .login-card,
-  .register-card {
-    width: 95%;
-    margin: auto;
-    padding: 20px;
+  * {
+    box-sizing: border-box;
   }
 
-  h1 {
-    font-size: 1.8rem;
+  img,
+  svg {
+    max-width: 100%;
+    height: auto;
   }
 
-  h2 {
-    font-size: 1.4rem;
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      position: relative;
+      min-height: auto;
+    }
+
+    .main-content {
+      width: 100%;
+      margin-left: 0;
+      padding: 12px;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card,
+    .panel,
+    .widget,
+    .chart-container {
+      width: 100%;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .auth-card,
+    .login-card,
+    .register-card {
+      width: 95%;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+    }
   }
 
-  table {
-    display: block;
-    overflow-x: auto;
+
+  .app-header {
+    height: 72px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(10, 18, 35, 0.95);
+    backdrop-filter: blur(12px);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-}
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-subtitle {
+    font-size: 12px;
+    color: #8f9bb3;
+    margin: 0;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px 14px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(59, 130, 246, 0.15);
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .profile-subtitle {
+    font-size: 12px;
+    color: #8f9bb3;
+  }
+
+  .btn-logout {
+    margin-left: 10px;
+  }
+
+  @media (max-width: 768px) {
+
+    .app-header {
+      padding: 12px;
+      height: auto;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .user-profile {
+      width: 100%;
+    }
+
+    .profile-subtitle {
+      display: none;
+    }
+  }}

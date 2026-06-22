@@ -560,55 +560,53 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Header */}
-      <header>
+      <header className="app-header">
         <div className="logo-section">
           <Shield className="logo-icon" size={28} />
           <div>
             <h1>{t.title}</h1>
-            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '-2px' }}>{t.subtitle}</p>
+            <p className="logo-subtitle">{t.subtitle}</p>
           </div>
         </div>
 
-        <div className="nav-controls">
-          {/* User Profile Info */}
+        <div className="header-right">
+
+          {/* Language */}
+          <div className="language-selector">
+            <Globe size={18} />
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="en">English</option>
+              <option value="sw">Swahili</option>
+              <option value="es">Spanish</option>
+              <option value="vi">Vietnamese</option>
+            </select>
+          </div>
+
+          {/* User Profile */}
           <div className="user-profile">
             <div className="user-avatar">
               <User size={16} />
             </div>
+
             <div className="user-details">
-              <span className="profile-name">{user?.username}</span>
-              <span className="profile-subtitle">{user?.role} • {user?.farmName}</span>
+              <span className="profile-name">
+                {user?.username}
+              </span>
+
+              <span className="profile-subtitle">
+                {user?.farmName}
+              </span>
             </div>
-            <button className="btn btn-secondary btn-logout" onClick={handleLogout} style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}>
+
+            <button
+              className="btn btn-secondary btn-logout"
+              onClick={handleLogout}
+            >
               Logout
             </button>
-          </div>
-
-          {/* Species Selector */}
-          <div className="species-pill">
-            <button
-              className={`species-btn ${species === 'Poultry' ? 'active poultry' : ''}`}
-              onClick={() => setSpecies('Poultry')}
-            >
-              🐥 {t.poultry}
-            </button>
-            <button
-              className={`species-btn ${species === 'Pig' ? 'active pig' : ''}`}
-              onClick={() => setSpecies('Pig')}
-            >
-              🐖 {t.pig}
-            </button>
-          </div>
-
-          {/* Multilingual Selector */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <Globe size={18} style={{ color: 'var(--color-text-secondary)' }} />
-            <select className="lang-select" value={lang} onChange={(e) => setLang(e.target.value)}>
-              <option value="en">English (EN)</option>
-              <option value="sw">Kiswahili (SW)</option>
-              <option value="es">Español (ES)</option>
-              <option value="vi">Tiếng Việt (VI)</option>
-            </select>
           </div>
         </div>
       </header>
