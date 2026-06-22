@@ -1324,9 +1324,7 @@ export default function App() {
                   <p style={{ fontSize: '0.85rem', color: 'var(--color-amber)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                     <Info size={16} /> <strong>Activating Gemini AI Agent Capabilities:</strong>
                   </p>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: '0.25rem' }}>
-                    To enable comprehensive diagnostic scans, outbreak predictive intelligence, and personalized farm guides, paste your Gemini API Key in the backend <strong>.env</strong> file (<code>GEMINI_API_KEY=your_key</code>). Until then, the agent operates in Local Advisor mode.
-                  </p>
+                  
                 </div>
               )}
             </div>
