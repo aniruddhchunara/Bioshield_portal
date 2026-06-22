@@ -1,0 +1,313 @@
+{
+  "outbreaks": [
+    {
+      "id": "outbreak-1781972848608",
+      "disease": "swine  flue",
+      "species": "Pig",
+      "region": "north",
+      "severity": "High",
+      "date": "2026-06-20",
+      "description": "high cause ",
+      "status": "Active"
+    },
+    {
+      "id": "outbreak-1781972358927",
+      "disease": "Test Swine Flu",
+      "species": "Poultry",
+      "region": "Test Region",
+      "severity": "High",
+      "date": "2026-06-20",
+      "description": "Test outbreak report",
+      "status": "Active"
+    },
+    {
+      "id": "outbreak-1781969960348",
+      "disease": "h5n1",
+      "species": "Poultry",
+      "region": "southwest",
+      "severity": "Critical",
+      "date": "2026-06-20",
+      "description": "very high ",
+      "status": "Active"
+    },
+    {
+      "id": "outbreak-1",
+      "disease": "Highly Pathogenic Avian Influenza (H5N1)",
+      "species": "Poultry",
+      "region": "Northwest District",
+      "severity": "Critical",
+      "date": "2026-06-18",
+      "description": "Confirmed case in backyard poultry. Quarantine zones established. Movement restrictions in place within 10km.",
+      "status": "Active"
+    },
+    {
+      "id": "outbreak-2",
+      "disease": "African Swine Fever (ASF)",
+      "species": "Pig",
+      "region": "Southern Valley",
+      "severity": "High",
+      "date": "2026-06-12",
+      "description": "Spillover detected in smallholder pig farm. Veterinary services monitoring carcass disposal and sanitization.",
+      "status": "Active"
+    },
+    {
+      "id": "outbreak-3",
+      "disease": "Foot and Mouth Disease (FMD)",
+      "species": "Pig",
+      "region": "Central Plains",
+      "severity": "Medium",
+      "date": "2026-05-28",
+      "description": "Control vaccination campaign launched. Outbreak contained, awaiting clearance.",
+      "status": "Contained"
+    }
+  ],
+  "riskAssessments": [
+    {
+      "id": "assessment-1781969404125",
+      "farmType": "Pig",
+      "scorePercentage": 45,
+      "riskLevel": "High",
+      "criticalFlaws": [
+        "Lack of perimeter fencing allows wild animals and stray livestock access to animals.",
+        "No vehicle or boot disinfection at farm gates.",
+        "Swill feeding of untreated food waste is a CRITICAL risk factor for African Swine Fever."
+      ],
+      "recommendations": [
+        "Install double-perimeter fencing to establish a secure buffer zone.",
+        "Install footbaths with fresh disinfectant (changed daily) at the entrance of every shed.",
+        "STRICTLY stop feeding swill/food scraps. Switch to heat-treated commercial feeds or boil scraps for at least 30 minutes at rolling boil."
+      ],
+      "timestamp": "2026-06-20T15:30:04.125Z",
+      "answers": {
+        "fencing": "no",
+        "visitors": "none",
+        "quarantine": "yes",
+        "swillFeed": "yes",
+        "disinfection": "no",
+        "waterSource": "treated"
+      }
+    },
+    {
+      "id": "assessment-1781966486843",
+      "farmType": "Pig",
+      "scorePercentage": 15,
+      "riskLevel": "High",
+      "criticalFlaws": [
+        "Unrestricted visitor access without logs/sanitization increases disease entry risk.",
+        "No quarantine area for new/sick animals. Pathogens will spread directly to the herd.",
+        "No vehicle or boot disinfection at farm gates.",
+        "Using untreated surface water which can easily carry avian influenza or other pathogens.",
+        "Swill feeding of untreated food waste is a CRITICAL risk factor for African Swine Fever."
+      ],
+      "recommendations": [
+        "Establish a visitor logbook, provide clean boots/coveralls, and enforce a 48-hour downtime.",
+        "Designate a quarantine pen at least 30 meters away from main sheds for new/returned livestock.",
+        "Install footbaths with fresh disinfectant (changed daily) at the entrance of every shed.",
+        "Implement chlorination or UV filtration for all water used by livestock.",
+        "STRICTLY stop feeding swill/food scraps. Switch to heat-treated commercial feeds or boil scraps for at least 30 minutes at rolling boil."
+      ],
+      "timestamp": "2026-06-20T14:41:26.843Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "all",
+        "quarantine": "no",
+        "swillFeed": "yes",
+        "disinfection": "no",
+        "waterSource": "untreated"
+      }
+    },
+    {
+      "id": "assessment-1781966486096",
+      "farmType": "Pig",
+      "scorePercentage": 15,
+      "riskLevel": "High",
+      "criticalFlaws": [
+        "Unrestricted visitor access without logs/sanitization increases disease entry risk.",
+        "No quarantine area for new/sick animals. Pathogens will spread directly to the herd.",
+        "No vehicle or boot disinfection at farm gates.",
+        "Using untreated surface water which can easily carry avian influenza or other pathogens.",
+        "Swill feeding of untreated food waste is a CRITICAL risk factor for African Swine Fever."
+      ],
+      "recommendations": [
+        "Establish a visitor logbook, provide clean boots/coveralls, and enforce a 48-hour downtime.",
+        "Designate a quarantine pen at least 30 meters away from main sheds for new/returned livestock.",
+        "Install footbaths with fresh disinfectant (changed daily) at the entrance of every shed.",
+        "Implement chlorination or UV filtration for all water used by livestock.",
+        "STRICTLY stop feeding swill/food scraps. Switch to heat-treated commercial feeds or boil scraps for at least 30 minutes at rolling boil."
+      ],
+      "timestamp": "2026-06-20T14:41:26.097Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "all",
+        "quarantine": "no",
+        "swillFeed": "yes",
+        "disinfection": "no",
+        "waterSource": "untreated"
+      }
+    },
+    {
+      "id": "assessment-1781965627636",
+      "farmType": "Pig",
+      "scorePercentage": 15,
+      "riskLevel": "High",
+      "criticalFlaws": [
+        "Unrestricted visitor access without logs/sanitization increases disease entry risk.",
+        "No quarantine area for new/sick animals. Pathogens will spread directly to the herd.",
+        "No vehicle or boot disinfection at farm gates.",
+        "Using untreated surface water which can easily carry avian influenza or other pathogens.",
+        "Swill feeding of untreated food waste is a CRITICAL risk factor for African Swine Fever."
+      ],
+      "recommendations": [
+        "Establish a visitor logbook, provide clean boots/coveralls, and enforce a 48-hour downtime.",
+        "Designate a quarantine pen at least 30 meters away from main sheds for new/returned livestock.",
+        "Install footbaths with fresh disinfectant (changed daily) at the entrance of every shed.",
+        "Implement chlorination or UV filtration for all water used by livestock.",
+        "STRICTLY stop feeding swill/food scraps. Switch to heat-treated commercial feeds or boil scraps for at least 30 minutes at rolling boil."
+      ],
+      "timestamp": "2026-06-20T14:27:07.637Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "all",
+        "quarantine": "no",
+        "swillFeed": "yes",
+        "disinfection": "no",
+        "waterSource": "untreated"
+      }
+    },
+    {
+      "id": "assessment-1781965509513",
+      "farmType": "Pig",
+      "scorePercentage": 100,
+      "riskLevel": "Low",
+      "criticalFlaws": [],
+      "recommendations": [],
+      "timestamp": "2026-06-20T14:25:09.513Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "none",
+        "quarantine": "yes",
+        "swillFeed": "no",
+        "disinfection": "yes",
+        "waterSource": "treated"
+      }
+    },
+    {
+      "id": "assessment-1781965476979",
+      "farmType": "Pig",
+      "scorePercentage": 100,
+      "riskLevel": "Low",
+      "criticalFlaws": [],
+      "recommendations": [],
+      "timestamp": "2026-06-20T14:24:36.980Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "none",
+        "quarantine": "yes",
+        "swillFeed": "no",
+        "disinfection": "yes",
+        "waterSource": "treated"
+      }
+    },
+    {
+      "id": "assessment-1781965455977",
+      "farmType": "Pig",
+      "scorePercentage": 100,
+      "riskLevel": "Low",
+      "criticalFlaws": [],
+      "recommendations": [],
+      "timestamp": "2026-06-20T14:24:15.977Z",
+      "answers": {
+        "fencing": "yes",
+        "visitors": "none",
+        "quarantine": "yes",
+        "swillFeed": "no",
+        "disinfection": "yes",
+        "waterSource": "treated"
+      }
+    }
+  ],
+  "complianceRecords": {
+    "poultry-default": {
+      "compartmentName": "Greenwood Poultry Farm",
+      "farmType": "Poultry",
+      "progress": 0,
+      "items": {
+        "fencing": false,
+        "visitorLog": false,
+        "quarantineArea": false,
+        "disinfectionBath": false,
+        "feedStorageSafe": false,
+        "waterTreatment": false,
+        "vetContract": false,
+        "recordKeeping": false,
+        "carcassDisposal": false,
+        "staffTraining": false
+      }
+    },
+    "pig-default": {
+      "compartmentName": "Sunny Hills Swine",
+      "farmType": "Pig",
+      "progress": 40,
+      "items": {
+        "fencing": false,
+        "visitorLog": true,
+        "quarantineArea": true,
+        "disinfectionBath": true,
+        "feedStorageSafe": false,
+        "waterTreatment": false,
+        "vetContract": true,
+        "recordKeeping": false,
+        "carcassDisposal": false,
+        "staffTraining": false
+      }
+    }
+  },
+  "communityPosts": [
+    {
+      "id": "post-1",
+      "author": "Dr. Sarah Mitchell",
+      "role": "Veterinarian",
+      "farmType": "General",
+      "avatar": "vet-1",
+      "title": "Increased Wild Bird Activity - AI Risk Warning",
+      "content": "Hello everyone. We are seeing high migration activity of wild waterfowl near the Northwest District reservoirs. Please ensure all poultry feed and water stations are strictly indoors to prevent wild bird contact.",
+      "timestamp": "2026-06-20T10:30:00Z",
+      "likes": 13,
+      "comments": [
+        {
+          "id": "c-1",
+          "author": "John Farmer",
+          "role": "Poultry Farmer",
+          "content": "Thank you Dr. Mitchell. Just double-checked our netting today.",
+          "timestamp": "2026-06-20T11:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "post-2",
+      "author": "Carlos Gomez",
+      "role": "Extension Officer",
+      "farmType": "Pig",
+      "avatar": "ext-1",
+      "title": "Swill Feeding Prohibitions reminder",
+      "content": "Reminder to all swine owners: swill feeding (feeding food scraps/waste to pigs) is the main vector for African Swine Fever. Feed only commercial pellets or cooked plant-based feed that has not touched meat.",
+      "timestamp": "2026-06-19T14:20:00Z",
+      "likes": 8,
+      "comments": []
+    }
+  ],
+  "trainingProgress": {
+    "user-default": {
+      "completedModules": [
+        "module-1",
+        "module-2",
+        "module-3"
+      ],
+      "scores": {
+        "module-1": 0,
+        "module-2": 0,
+        "module-3": 0
+      }
+    }
+  }
+}
