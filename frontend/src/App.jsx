@@ -1319,14 +1319,6 @@ export default function App() {
                 </div>
               </div>
 
-              {aiUsingFallback && (
-                <div className="card" style={{ marginTop: '1rem', background: 'rgba(245,158,11,0.05)', borderColor: 'rgba(245,158,11,0.2)' }}>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-amber)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Info size={16} /> <strong>Activating Gemini AI Agent Capabilities:</strong>
-                  </p>
-                  
-                </div>
-              )}
             </div>
           )}
 
