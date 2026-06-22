@@ -201,100 +201,124 @@
     right: 0;
     border-right-color: var(--border);
   }
-  
 
-.ticks {
-  position: relative;
-  width: 100%;
-}
 
-.ticks::before,
-.ticks::after {
-  content: '';
-  position: absolute;
-  top: -4.5px;
-  border: 5px solid transparent;
-}
-
-.ticks::before {
-  left: 0;
-  border-left-color: var(--border);
-}
-
-.ticks::after {
-  right: 0;
-  border-right-color: var(--border);
-}
-
-/* Mobile Responsive Fixes */
-html,
-body,
-#root {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-img,
-svg {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
+  .ticks {
     position: relative;
-    min-height: auto;
-  }
-
-  .main-content {
-    width: 100%;
-    margin-left: 0;
-    padding: 12px;
-  }
-
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card,
-  .panel,
-  .widget,
-  .chart-container {
     width: 100%;
   }
 
-  input,
-  select,
-  textarea,
-  button {
+  .ticks::before,
+  .ticks::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  .ticks::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+
+  .ticks::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+
+  /* Mobile Responsive Fixes */
+  html,
+  body,
+  #root {
     width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
   }
 
-  .auth-card,
-  .login-card,
-  .register-card {
-    width: 95%;
-    margin: auto;
-    padding: 20px;
+  * {
+    box-sizing: border-box;
   }
 
-  h1 {
-    font-size: 1.8rem;
+  img,
+  svg {
+    max-width: 100%;
+    height: auto;
   }
 
-  h2 {
-    font-size: 1.4rem;
-  }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      position: relative;
+      min-height: auto;
+    }
 
-  table {
-    display: block;
-    overflow-x: auto;
+    .main-content {
+      width: 100%;
+      margin-left: 0;
+      padding: 12px;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card,
+    .panel,
+    .widget,
+    .chart-container {
+      width: 100%;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .auth-card,
+    .login-card,
+    .register-card {
+      width: 95%;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+    }
   }
-}}
+}
+
+.language-pill {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.language-pill button {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.language-pill button.active {
+  background: #2563eb;
+  color: white;
+}
