@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Shield, 
-  Activity, 
-  Award, 
-  BookOpen, 
-  MessageSquare, 
-  Bot, 
-  Plus, 
-  Check, 
-  Globe, 
-  Calendar, 
-  MapPin, 
-  AlertTriangle, 
-  Heart, 
-  Send, 
-  Info, 
-  RefreshCw, 
-  FileText, 
+import {
+  Shield,
+  Activity,
+  Award,
+  BookOpen,
+  MessageSquare,
+  Bot,
+  Plus,
+  Check,
+  Globe,
+  Calendar,
+  MapPin,
+  AlertTriangle,
+  Heart,
+  Send,
+  Info,
+  RefreshCw,
+  FileText,
   ChevronRight,
   User,
   ExternalLink,
@@ -26,14 +26,14 @@ import {
 import { translations, surveyQuestions } from './translations';
 
 const API_BASE =
-  import.meta.env.https://bioshield-portal.onrender.com
- || 'http://127.0.0.1:5000/api';
-
+  import.meta.env.DEV
+    ? 'http://127.0.0.1:5000/api'
+    : 'https://bioshield-portal.onrender.com/api';
 export default function App() {
   const [lang, setLang] = useState('en');
   const [species, setSpecies] = useState('Poultry'); // Poultry or Pig
   const [activeTab, setActiveTab] = useState('dashboard');
-  
+
   // Auth state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -292,7 +292,7 @@ export default function App() {
         recommendations: ['Install perimeter security', 'Enforce sanitization protocols', 'Use clean feeds'],
         timestamp: new Date().toISOString()
       };
-      
+
       setCurrentSurveyResult(mockResult);
       setAssessments([mockResult, ...assessments]);
     }
@@ -332,12 +332,12 @@ export default function App() {
   const handleQuizSubmit = async () => {
     const currentQuiz = activeLessonModule.quiz[currentQuizQuestion];
     let isCorrect = selectedQuizOption === currentQuiz.answer;
-    
+
     let finalScore = quizScore;
     if (isCorrect) {
       finalScore += 100;
     }
-    
+
     setQuizScore(finalScore);
     setShowQuizResult(true);
 
@@ -573,13 +573,13 @@ export default function App() {
 
           {/* Species Selector */}
           <div className="species-pill">
-            <button 
+            <button
               className={`species-btn ${species === 'Poultry' ? 'active poultry' : ''}`}
               onClick={() => setSpecies('Poultry')}
             >
               🐥 {t.poultry}
             </button>
-            <button 
+            <button
               className={`species-btn ${species === 'Pig' ? 'active pig' : ''}`}
               onClick={() => setSpecies('Pig')}
             >
@@ -602,7 +602,7 @@ export default function App() {
 
       {/* Main Layout */}
       <div className="main-layout">
-        
+
         {/* Sidebar Nav */}
         <div className="sidebar">
           <div className="nav-links">
@@ -631,7 +631,7 @@ export default function App() {
               {t.assistant}
             </button>
           </div>
-          
+
           <div style={{ marginTop: 'auto', padding: '1rem', background: 'rgba(59,130,246,0.05)', borderRadius: '0.75rem', border: '1px solid var(--border-color)' }}>
             <p style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-blue)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               <Info size={14} /> Veterinary Support
@@ -672,7 +672,7 @@ export default function App() {
 
         {/* Content Area */}
         <div className="content-area">
-          
+
           {/* TAB 1: DASHBOARD */}
           {activeTab === 'dashboard' && (
             <div>
@@ -811,11 +811,11 @@ export default function App() {
                     {/* Simulated SVG Grid Map */}
                     <svg width="100%" height="100%" style={{ position: 'absolute', opacity: 0.15 }}>
                       <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="1"/>
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="1" />
                       </pattern>
                       <rect width="100%" height="100%" fill="url(#grid)" />
                     </svg>
-                    
+
                     {/* Glowing containment zones */}
                     <div style={{ position: 'absolute', top: '30%', left: '40%', width: '40px', height: '40px', background: 'rgba(239, 68, 68, 0.4)', borderRadius: '50%', boxShadow: '0 0 20px rgba(239, 68, 68, 0.6)', animation: 'pulse 2s infinite' }}></div>
                     <div style={{ position: 'absolute', top: '65%', left: '70%', width: '30px', height: '30px', background: 'rgba(245, 158, 11, 0.4)', borderRadius: '50%', boxShadow: '0 0 15px rgba(245, 158, 11, 0.6)' }}></div>
@@ -866,7 +866,7 @@ export default function App() {
                         </div>
                       </div>
                     ))}
-                    
+
                     <button className="btn btn-primary" style={{ width: '100%', padding: '0.75rem' }} onClick={handleSurveySubmit}>
                       Submit Assessment
                     </button>
@@ -986,8 +986,8 @@ export default function App() {
                       { id: 'carcassDisposal', title: 'Maintain sanitary, closed carcass disposal units (deep burial or incinerator)' },
                       { id: 'staffTraining', title: 'Document biosecurity induction and protocol training for all farm staff' }
                     ].map((item) => (
-                      <div 
-                        key={item.id} 
+                      <div
+                        key={item.id}
                         className={`compliance-item ${compliance.items[item.id] ? 'checked' : ''}`}
                         onClick={() => handleComplianceToggle(item.id)}
                       >
@@ -1002,7 +1002,7 @@ export default function App() {
 
                 <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                   <Award size={64} style={{ color: compliance.progress === 100 ? 'var(--color-emerald)' : 'var(--color-text-muted)', filter: compliance.progress === 100 ? 'drop-shadow(0 0 10px rgba(16,185,129,0.3))' : 'none', marginBottom: '1rem' }} />
-                  
+
                   <h3>{compliance.progress === 100 ? "Ready for Department Inspection" : "Accreditation Progress"}</h3>
                   <div style={{ width: '100%', margin: '1rem 0' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.25rem' }}>
@@ -1015,7 +1015,7 @@ export default function App() {
                   </div>
 
                   <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', maxWidth: '350px' }}>
-                    {compliance.progress === 100 
+                    {compliance.progress === 100
                       ? "Congratulations! Your farm biosecurity standards align fully with global compartment practices. You may download your certificate profile and request an onsite veterinary department auditor."
                       : `You have completed ${Object.values(compliance.items).filter(Boolean).length} out of 10 items. Complete the remaining steps to request verification.`}
                   </p>
@@ -1055,7 +1055,7 @@ export default function App() {
                             {isCompleted && <span style={{ color: 'var(--color-emerald)', fontSize: '0.8rem', fontWeight: 600, background: 'var(--color-emerald-bg)', padding: '0.1rem 0.4rem', borderRadius: '0.25rem' }}>✓ Passed</span>}
                           </h3>
                           <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: '1rem' }}>{mod.description}</p>
-                          
+
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                             {mod.lessons.map((les, idx) => (
                               <div key={idx} className="lesson-tag">
@@ -1097,7 +1097,7 @@ export default function App() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                           {activeLessonModule.lessons.map((les, idx) => (
                             <div key={idx} style={{ padding: '1rem', background: 'var(--bg-card-hover)', border: '1px solid var(--border-color)', borderRadius: '0.75rem' }}>
-                              <p style={{ fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Topic {idx+1}: {les}</p>
+                              <p style={{ fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Topic {idx + 1}: {les}</p>
                               <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>
                                 Study guidelines and procedures to minimize viral dissemination inside production buildings. Always execute segregration zones between public traffic and livestock barns.
                               </p>
@@ -1110,7 +1110,7 @@ export default function App() {
                         <h4 style={{ marginBottom: '1rem', color: 'var(--color-amber)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                           <Award size={18} /> Module Quiz
                         </h4>
-                        
+
                         {activeLessonModule.quiz.map((q, idx) => (
                           <div key={idx} className="question-card" style={{ background: 'var(--bg-card)' }}>
                             <p style={{ fontWeight: 600, marginBottom: '1rem' }}>{q.question}</p>
@@ -1140,7 +1140,7 @@ export default function App() {
                       <p style={{ fontSize: '1.1rem', margin: '1rem 0' }}>
                         {t.scoreText}: <strong style={{ color: 'var(--color-emerald)' }}>{quizScore}%</strong>
                       </p>
-                      
+
                       <div style={{ padding: '1rem', background: 'var(--bg-card-hover)', borderRadius: '0.75rem', display: 'inline-block', marginBottom: '1.5rem' }}>
                         {quizScore >= 100 ? (
                           <span style={{ color: 'var(--color-emerald)', fontWeight: 700 }}>🏆 {t.pass}!</span>
@@ -1212,7 +1212,7 @@ export default function App() {
                             <div className="comment-header">
                               <span>{comm.author} ({comm.role})</span>
                               <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>
-                                {new Date(comm.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                {new Date(comm.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
                             <p className="comment-content">{comm.content}</p>
@@ -1220,9 +1220,9 @@ export default function App() {
                         ))}
 
                         <div className="post-comment-input-area">
-                          <input 
-                            type="text" 
-                            className="post-comment-input" 
+                          <input
+                            type="text"
+                            className="post-comment-input"
                             placeholder="Write a response..."
                             onKeyDown={(e) => {
                               if (e.key === 'Enter' && e.target.value.trim()) {
@@ -1277,7 +1277,7 @@ export default function App() {
                     <Bot size={20} style={{ color: 'var(--color-blue)' }} />
                     <span style={{ fontWeight: 600 }}>Gemini Veterinary Agent</span>
                   </div>
-                  
+
                   <div className={`chat-status ${aiUsingFallback ? 'fallback' : 'ready'}`}>
                     <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'currentColor' }}></div>
                     <span>{aiUsingFallback ? t.fallbackAI : t.connectedAI}</span>
@@ -1340,14 +1340,14 @@ export default function App() {
         <div className="modal-overlay">
           <div className="modal-content">
             <h3 style={{ marginBottom: '1.25rem' }}>{t.addPost}</h3>
-            
+
             <form onSubmit={handlePostSubmit}>
               <div className="form-group">
                 <label>{t.postTitle}</label>
-                <input 
-                  type="text" 
-                  className="form-input" 
-                  value={newPost.title} 
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newPost.title}
                   onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
                   required
                 />
@@ -1355,8 +1355,8 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.postContent}</label>
-                <textarea 
-                  className="form-textarea" 
+                <textarea
+                  className="form-textarea"
                   rows={4}
                   value={newPost.content}
                   onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
@@ -1366,10 +1366,10 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.postAuthor}</label>
-                <input 
-                  type="text" 
-                  className="form-input" 
-                  value={newPost.author} 
+                <input
+                  type="text"
+                  className="form-input"
+                  value={newPost.author}
                   onChange={(e) => setNewPost({ ...newPost, author: e.target.value })}
                   required
                 />
@@ -1377,7 +1377,7 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.postRole}</label>
-                <select 
+                <select
                   className="form-select"
                   value={newPost.role}
                   onChange={(e) => setNewPost({ ...newPost, role: e.target.value })}
@@ -1406,11 +1406,11 @@ export default function App() {
             <form onSubmit={handleOutbreakSubmit}>
               <div className="form-group">
                 <label>{t.diseaseName}</label>
-                <input 
-                  type="text" 
-                  className="form-input" 
+                <input
+                  type="text"
+                  className="form-input"
                   placeholder="e.g. Avian Influenza (H5N1)"
-                  value={newOutbreak.disease} 
+                  value={newOutbreak.disease}
                   onChange={(e) => setNewOutbreak({ ...newOutbreak, disease: e.target.value })}
                   required
                 />
@@ -1418,11 +1418,11 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.region}</label>
-                <input 
-                  type="text" 
-                  className="form-input" 
+                <input
+                  type="text"
+                  className="form-input"
                   placeholder="e.g. Southwest Sector"
-                  value={newOutbreak.region} 
+                  value={newOutbreak.region}
                   onChange={(e) => setNewOutbreak({ ...newOutbreak, region: e.target.value })}
                   required
                 />
@@ -1430,7 +1430,7 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.severity}</label>
-                <select 
+                <select
                   className="form-select"
                   value={newOutbreak.severity}
                   onChange={(e) => setNewOutbreak({ ...newOutbreak, severity: e.target.value })}
@@ -1443,8 +1443,8 @@ export default function App() {
 
               <div className="form-group">
                 <label>{t.description}</label>
-                <textarea 
-                  className="form-textarea" 
+                <textarea
+                  className="form-textarea"
                   rows={3}
                   value={newOutbreak.description}
                   onChange={(e) => setNewOutbreak({ ...newOutbreak, description: e.target.value })}
@@ -1486,7 +1486,7 @@ function LoginScreen({ onLoginSuccess }) {
     setLoading(true);
 
     const endpoint = isLogin ? '/auth/login' : '/auth/register';
-    const body = isLogin 
+    const body = isLogin
       ? { username, password }
       : { username, password, role, farmName, speciesPreference };
 
@@ -1521,15 +1521,15 @@ function LoginScreen({ onLoginSuccess }) {
         </div>
 
         <div className="login-tabs">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={`login-tab ${isLogin ? 'active' : ''}`}
             onClick={() => { setIsLogin(true); setError(''); setShowPassword(false); }}
           >
             Sign In
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={`login-tab ${!isLogin ? 'active' : ''}`}
             onClick={() => { setIsLogin(false); setError(''); setShowPassword(false); }}
           >
@@ -1542,29 +1542,29 @@ function LoginScreen({ onLoginSuccess }) {
 
           <div className="form-group">
             <label>Username</label>
-            <input 
-              type="text" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
-              placeholder="Enter your username" 
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               className="form-input"
-              required 
+              required
             />
           </div>
 
           <div className="form-group">
             <label>Password</label>
             <div className="password-input-container">
-              <input 
-                type={showPassword ? "text" : "password"} 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                placeholder="Enter your password" 
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
                 className="form-input password-input"
-                required 
+                required
               />
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="password-toggle-btn"
                 onClick={() => setShowPassword(!showPassword)}
                 title={showPassword ? "Hide password" : "Show password"}
@@ -1578,13 +1578,13 @@ function LoginScreen({ onLoginSuccess }) {
             <>
               <div className="form-group">
                 <label>Farm Name</label>
-                <input 
-                  type="text" 
-                  value={farmName} 
-                  onChange={(e) => setFarmName(e.target.value)} 
-                  placeholder="e.g. Greenwood Swine" 
+                <input
+                  type="text"
+                  value={farmName}
+                  onChange={(e) => setFarmName(e.target.value)}
+                  placeholder="e.g. Greenwood Swine"
                   className="form-input"
-                  required 
+                  required
                 />
               </div>
 
